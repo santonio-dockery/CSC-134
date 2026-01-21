@@ -6,6 +6,8 @@
  tell the user how much you have
  how much each costs
  and what the total would be.
+ As a store owner, I want to set uo my store,
+ so that I can sell things and make $$$.
 
  If we have time we'll make it more interative
  */
@@ -25,6 +27,20 @@ int main() {
     int purchased; //how many the user wants
     double price_each = 0.50;
     double total_price;
+
+    //Part1: Set up the store
+    // Note: right now items cant have spaces in their names
+    cout << "Welcome to the store setup program." << endl;
+    cout << "Name of item? ";
+    cin >> item_name;
+    cout << "Number of items? ";
+    cin >> item_count;
+    cout << "Price each? ";
+    cin >> price_each;
+
+
+
+    // Part Two: Run the store(no changes)
 
     // set doubles to print with 2 decimal places
     cout << setprecision(2) << fixed;
