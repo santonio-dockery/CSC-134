@@ -1,0 +1,32 @@
+#CSC 134
+#Turtle Graphics
+#Santonio Dockery
+
+import turtle
+
+t = turtle.Turtle()
+screen = turtle.Screen()
+
+#set the colors
+t.color("blue")
+screen.bgcolor("black")
+t.width(3)
+
+#speed controls
+t.speed(0)
+
+#draw some lines
+length = 50
+colors = ["red","orange","yellow","green","blue","purple"]
+for side in range(200):
+    color = colors[side % 6]
+    t.color(color)
+    length = length + 1
+    for sides in range(5):
+        t.forward(length)
+        t.right(91)
+    t.right(5) #a little extra twist
+
+
+# end of program
+screen.exitonclick()
