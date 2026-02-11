@@ -1,6 +1,6 @@
 /*
 m3t1
-compare tow triangles
+compare two triangles
 */
 #include <iostream>
 using namespace std;
