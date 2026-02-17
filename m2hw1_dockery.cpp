@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {   
      string name;
-     string name2 = "Santonio Dockery";
+     
      int acc_num = 53467;
     double acc_balance, deposit, withdraw, final_balance;
 
@@ -22,7 +22,7 @@ cout << setprecision(2) << fixed;
 cout << "Question 1" << endl;
 cout << endl;
 cout << "What is your name: "; 
-cin >> name;
+getline(cin, name); 
 cout << "Account Balance:";
 cin >> acc_balance;
 cout << "Deposit:";
@@ -32,7 +32,7 @@ cin >> withdraw;
 
 final_balance = acc_balance - withdraw + deposit;
 
-cout << "Account Name:" << name2 << endl;
+cout << "Account Name:" << name << endl;
 cout << "Account Number:" << acc_num << endl;
 cout << "Final Balance:" << final_balance << endl;
 cout << endl;
@@ -78,7 +78,9 @@ cout << endl;
 
     cout << "Question 3" << endl;
 cout << endl;
- double boxes, slices, visitors, pieces;
+ int boxes, slices, visitors, total_slices, slices_eaten, final_pieces;
+
+
 cout << "How many boxes?:";
 cin >> boxes;
 cout << "How many slices per pizza?:";
@@ -86,16 +88,29 @@ cin >> slices;
 cout << "How many people are attenging?:";
 cin >> visitors;
 
-pieces = boxes * slices - 3*visitors;
+total_slices = boxes * slices;
+slices_eaten = visitors * 3;
+final_pieces = total_slices - slices_eaten;
+
+cout << "Leftover slices:" << final_pieces << endl;
 
 
 
+string LetsGo, team, school, cheerOne, cheerTwo;
+  LetsGo = "Let's go ";
+ school = "FTCC";
+ team = "Trojans";
+cheerOne = LetsGo + school;
+cheerTwo = LetsGo + team;
+ 
+ cout << "Question 4" << endl;
+cout << endl;
+cout << cheerOne << endl;
+cout << cheerOne << endl;
+cout << cheerOne << endl;
+cout << cheerTwo << endl;
 
-
-
-
-
-
+return 0;
 
 
 
