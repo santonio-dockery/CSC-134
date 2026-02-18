@@ -41,6 +41,28 @@ int main() {
     }
 
     cout << "Roll results: " << status << endl;
+    // handle the point case
+    if (status == "point") {
+        cout << "Point is " << point << endl;
+        cout << "Roll " << point << " before a 7!" << endl;
+
+        bool finished = false;
+        while (!finished) {
+            total = roll() + roll();
+            if (total == point) {
+                cout <<  "Rolled " << total << " you win!" << endl;
+                finished = true;
+            }
+            else if (total == 7) {
+                cout << "Rolled " << total << " you lose!" << endl;
+                finished = true;
+                
+            }
+            else {
+                cout << "Rolled " << total << " -- roll again" << endl;
+            }
+        }
+    }
 
     
     return 0;
