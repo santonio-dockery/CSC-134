@@ -12,6 +12,12 @@ void picksword();
 void picklance();
 void pickshield();
 void pickbow();
+void start_battle();
+
+// Global Data
+string weapon_name;
+int weapon_strength;
+
 
 // main() goes here
 int main() {
@@ -48,7 +54,7 @@ int main() {
     else {
         cout << "Your teleported within an Ogre's den" << endl;
     }
-    cout << "Ogres start surrounding you" << endl << endl;
+    
     
 
     return 0; // end of game
@@ -57,29 +63,46 @@ int main() {
 // List FULL FUNCTIONS of all the choices at the bottom
 void picksword() {
     cout << "You chose a sword." << endl;
-    cout << "And then you are teleported to an ogre's den "; // you finish it!
-    int choice;
-    cin >> choice;
+    cout << "You are then teleported to an ogre's den! "; // you finish it!
+    weapon_name = "Sword";
+    weapon_strength = 20;
+    start_battle(); // TODO, write this
 }
 
 void picklance() {
     cout << "You chose a lance." << endl;
-    cout << "And then you are teleported to an ogre's den "; // you finish it!
-    int choice;
-    cin >> choice;
+    cout << "You are then teleported to an ogre's den! "; // you finish it!
+     weapon_name = "Lance";
+    weapon_strength = 10;
+    start_battle(); // TODO, write this
 }
+
 void pickshield() {
     cout << "You chose a shield." << endl;
-    cout << "And then you are teleported to an ogre's den "; // you finish it!
-    int choice;
-    cin >> choice;
+    cout << "You are then teleported to an ogre's den! "; // you finish it!
+     weapon_name = "Shield";
+    weapon_strength = 1;
+    start_battle(); // TODO, write this
 }
+
 void pickbow() {
     cout << "You chose a bow." << endl;
-    cout << "And then you are teleported to an ogre's den "; // you finish it!
-    int choice;
-    cin >> choice;
-    
+    cout << "You are then teleported to an ogre's den! "; // you finish it!
+    weapon_name = "Bow";
+    weapon_strength = 5;
+    start_battle(); // TODO, write this
 }
+void start_battle() {
+    cout << "You enter the battle with a " << weapon_name << "!" << endl;
+    cout << "Your weapon strength is " << weapon_strength << endl;
+    if (weapon_strength > 5) {
+        cout << "You defeated the ogres" << endl;
+    }
+    else {
+        cout << "You were killed by the ogres" << endl;
+    }
+}
+    
+
 
 // use the other choices in choice 1 or 2...
