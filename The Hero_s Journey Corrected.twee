@@ -1,0 +1,208 @@
+:: StoryTitle
+The Hero's Journey Corrected
+
+
+:: StoryData
+{
+  "ifid": "9A2B3C4D-5E6F-7890-ABCD-1234567890EF",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Initialize",
+  "zoom": 1
+}
+
+
+:: BattleResult {"position":"900,25","size":"100,100"}
+# BATTLE OVER
+---
+(if: $ogreHP <= 0)[
+  **Victory!** You defeated the ogre.
+  (set: $wins to $wins + 1)
+]
+(else:)[
+  **Defeat!** The ogre bested you.
+  (set: $losses to $losses + 1)
+]
+
+[[Check Final Stats->FinalResults]]
+[[Play Again->ChooseWeapon]]
+
+
+:: ChooseWeapon {"position":"275,25","size":"100,100"}
+### Game #$gamesPlayed
+The Goddess offers you a weapon. Choose wisely!
+
+* (link: "1. Sword - High damage, aggressive options")[ (set: $weapon to "Sword") (go-to: "WeaponSelected") ]
+* (link: "2. Lance - Range control, keep the ogre at bay")[ (set: $weapon to "Lance") (go-to: "WeaponSelected") ]
+* (link: "3. Bow - Tactical setup, hit hard from a distance")[ (set: $weapon to "Bow") (go-to: "WeaponSelected") ]
+* (link: "4. Shield - Outlast and punish")[ (set: $weapon to "Shield") (go-to: "WeaponSelected") ]
+* (link: "Bare Fists - Truly heroic (or truly foolish)")[ (set: $weapon to "Bare Fists") (go-to: "WeaponSelected") ]
+
+
+:: FinalResults {"position":"1025,25","size":"100,100"}
+# FINAL RESULTS
+---
+Games Played: $gamesPlayed
+Wins: $wins
+Losses: $losses
+
+(if: $wins > $losses)[The Goddess is pleased with your progress!]
+(else:)[Keep training, hero!]
+
+(link: "Restart Entire Journey")[(go-to: "Initialize")]
+
+
+:: Initialize {"position":"25,25","size":"100,100"}
+{
+  (set: $wins to 0)
+  (set: $losses to 0)
+  (set: $gamesPlayed to 0)
+  (go-to: "Start")
+}
+
+
+:: OgreTurn {"position":"775,25","size":"100,100"}
+{
+  (if: $playerDodging)[
+    (set: $log to "The ogre swings and misses! You blocked/dodged it!")
+  ]
+  (else:)[
+    (set: $ogreDmg to (random: 8, 18))
+    (if: $playerOpen)[(set: $ogreDmg to $ogreDmg + 10)]
+    (set: $playerHP to $playerHP - $ogreDmg)
+    (set: $log to "The ogre hits you for $ogreDmg damage!")
+  ]
+
+  (set: $round to $round + 1)
+  (if: $playerHP <= 0)[(go-to: "BattleResult")]
+  (else:)[(go-to: "PlayerTurn")]
+}
+
+
+:: PlayerTurn {"position":"525,25","size":"100,100"}
+### Round $round
+**Your HP:** $playerHP | **Ogre HP:** $ogreHP
+**Status:** (if: $playerOpen)[WIDE OPEN! ](if: $aimedShotReady)[AIMED! ](if: $counterReady)[BRACED! ]
+
+---
+$log
+---
+**What is your move?**
+
+(if: $weapon is "Sword")[
+  * (link: "Slash")[(set: $action to "Slash")(go-to: "ProcessAction")]
+  * (link: "Heavy Strike")[(set: $action to "Heavy")(go-to: "ProcessAction")]
+  * (link: "Intimidate")[(set: $action to "Intimidate")(go-to: "ProcessAction")]
+]
+(else-if: $weapon is "Lance")[
+  * (link: "Jab")[(set: $action to "Jab")(go-to: "ProcessAction")]
+  * (link: "Shove")[(set: $action to "Shove")(go-to: "ProcessAction")]
+]
+(else-if: $weapon is "Bow")[
+  * (link: "Quick Shot")[(set: $action to "QuickShot")(go-to: "ProcessAction")]
+  * (link: "Aim")[(set: $action to "Aim")(go-to: "ProcessAction")]
+]
+(else-if: $weapon is "Shield")[
+  * (link: "Bash")[(set: $action to "Bash")(go-to: "ProcessAction")]
+  * (link: "Brace")[(set: $action to "Brace")(go-to: "ProcessAction")]
+  * (link: "Counter")[(set: $action to "Counter")(go-to: "ProcessAction")]
+]
+(else:)[
+  * (link: "Punch")[(set: $action to "Punch")(go-to: "ProcessAction")]
+]
+
+
+:: ProcessAction {"position":"650,25","size":"100,100"}
+{
+  (set: $playerDodging to false, $playerOpen to false)
+  (set: $dmg to (random: $baseMin, $baseMax))
+  
+  (if: $action is "Slash")[
+    (set: $ogreHP to $ogreHP - $dmg)
+    (set: $log to "You slashed the ogre for $dmg damage!")
+  ]
+  (else-if: $action is "Heavy")[
+    (set: $dmg to $dmg + 12)
+    (set: $ogreHP to $ogreHP - $dmg)
+    (set: $playerOpen to true)
+    (set: $log to "HEAVY STRIKE! You dealt $dmg damage but you are wide open!")
+  ]
+  (else-if: $action is "Brace")[
+    (set: $playerDodging to true, $counterReady to true)
+    (set: $log to "You hunkered down behind your shield.")
+  ]
+  (else-if: $action is "Counter")[
+    (if: $counterReady)[(set: $dmg to 30)(set: $ogreHP to $ogreHP - $dmg)(set: $log to "Explosive Counter! $dmg damage!")]
+    (else:)[(set: $log to "You tried to counter without bracing! It failed.")]
+    (set: $counterReady to false)
+  ]
+  (else-if: $action is "Aim")[
+    (set: $aimedShotReady to true, $log to "You took careful aim.")
+  ]
+  (else-if: $action is "QuickShot")[
+    (if: $aimedShotReady)[(set: $dmg to $dmg + 20)(set: $aimedShotReady to false)]
+    (set: $ogreHP to $ogreHP - $dmg)
+    (set: $log to "You fired an arrow for $dmg damage!")
+  ]
+  (else:)[
+    (set: $ogreHP to $ogreHP - $dmg)
+    (set: $log to "You hit the ogre for $dmg damage!")
+  ]
+
+  (if: $ogreHP <= 0)[(go-to: "BattleResult")]
+  (else:)[(go-to: "OgreTurn")]
+}
+
+
+:: Start {"position":"150,25","size":"100,100"}
+# THE HERO'S JOURNEY
+---
+You're going about your day when suddenly you're whisked into another world!
+A Goddess appears and says **YOU** are the hero.
+
+(link: "Accept your destiny")[
+  (set: $gamesPlayed to $gamesPlayed + 1)
+  (go-to: "ChooseWeapon")
+]
+
+
+:: WeaponSelected {"position":"400,25","size":"100,100"}
+{
+  (set: $playerHP to 100)
+  (set: $ogreHP to 150)
+  (set: $round to 1)
+  (set: $playerOpen to false)
+  (set: $ogreTaunted to false)
+  (set: $playerDodging to false)
+  (set: $ogreSlowed to false)
+  (set: $aimedShotReady to false)
+  (set: $counterReady to false)
+  (set: $log to "The battle begins!")
+
+  (if: $weapon is "Sword")[
+    (set: $baseMin to 15, $baseMax to 30)
+  ]
+  (else-if: $weapon is "Lance")[
+    (set: $baseMin to 10, $baseMax to 20)
+  ]
+  (else-if: $weapon is "Bow")[
+    (set: $baseMin to 6, $baseMax to 14)
+  ]
+  (else-if: $weapon is "Shield")[
+    (set: $baseMin to 3, $baseMax to 8)
+  ]
+  (else:)[
+    (set: $baseMin to 2, $baseMax to 6)
+  ]
+}
+You grab the **$weapon**. 
+
+(if: $weapon is "Sword")[It hums with power in your grip.]
+(else-if: $weapon is "Lance")[It's longer than you expected.]
+(else-if: $weapon is "Bow")[You grab the Bow and a quiver of arrows.]
+(else-if: $weapon is "Shield")[It's heavier than it looks.]
+(else:)[The Goddess looks worried as you raise your fists.]
+
+You are teleported to an ogre's den! 
+
+[[Enter the Battle!->PlayerTurn]]
