@@ -8,14 +8,11 @@
 
 
 #include <iostream>
+#include "m5t1.h"
 
 using namespace std;
 
-// function declaractions
-void say_hi();
-int show_answer();
-double square_a_number(double number);
-//main goes here
+
 
 int main()
 {
@@ -29,18 +26,4 @@ int main()
     return 0;
 }
 
-// function defintions (full code))
-void say_hi () {
- cout << "Hello world!" << endl;
- return; //optional assumed
-}
 
-int show_answer() {
-  int answer = 42;
-  return answer;
-}
-
-double square_a_number(double number) {
-double square = number * number ;
-return square;
-}
