@@ -1,0 +1,48 @@
+# starter
+# promt 1 - claude
+
+here is my starter file, my teacher said were going to use the gamejam example with my code, our goal is to make the code more complicated amd better without getting lost    from the assignment Part 2 - Adding more choices
+
+After we get the basic menu working, we'll add more functions for the different parts of the story.
+
+To do this you'll want to follow these instructions:
+
+
+
+
+
+Come up with a new story branch and give it a name. (This should be words_connected_with_underscores).
+
+
+
+Add the function prototype at the top of the file, above main(), with the others.
+
+
+
+Add the function definition (the full function) at the bottom of the file, below main(), with the others.
+
+
+
+Now call the function somewhere in the story to add the new branch!
+
+To complete this Lab, you should add at least two story branch functions to the program. I've already set up the choices for choice_back_door and choice_go_home, so you can just add code to those, or you can make totally new choices.
+
+If You Already Have This Down...
+
+If this is easy, great! I would like you to, together with the AI tool you use, add a new feature or two. Here's some ideas:
+
+Input Validation: Write a function that is used instead of cin. This function handles input validation, so if the user makes an illegal choice, they just have to make the choice again. (This function would probably take, as input, the number of choices for this decision. Example: user_choice = get_choice(3); // pick from 1 to 3
+
+Storing Data: Whether it's in global variables, an array, or using object oriented code like structs or classes, we can add in more complex data if your game needs it. Maybe your player character has stats, or hit points, or money... (M5LAB_A, available from your instructor, gives some ways you could do this)
+
+Whatever else you think of: Whether it's a combat loop, or ASCII graphics, or a simple map, feel free to experiment!  what i want to add: lets make the combat actually work like combat and not a loop. The combat isn't balanced
+
+-----------
+Output 
+Looks like the widget isn't rendering — let me just ask directly: what are your preferences on those three questions?
+
+Balance approach: Just tune the numbers, add player stats, or both?
+New story branches: Fight the ogre mid-game-jam story, stress gives combat buffs/debuffs, or something else?
+Output: One combined .cpp file, or keep .h + .cpp separate?
+
+-------------
