@@ -26,12 +26,12 @@ class Rectangle {
         length = l;
     }
     void drawRectangle() {
-        string pixel = "*"; //use whatever
+        std::string pixel = "*"; //use whatever
         for (int i=0; i< length; i++){
             for (int j=0; j<width; j++) {
                 std::cout << pixel;
             }
-            cout << endl;
+            std::cout << endl;
         }
 
     }
